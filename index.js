@@ -6,15 +6,7 @@ const ITEMS_NOSTRUM = [152898, 184659, 201005, 201022, 855604, 201006, 201007, 2
       BUFF_RES_INVINCIBLE = 1134,
       BUFF_PHOENIX = 6007;
 
-const SettingsUI = require('tera-mod-ui').Settings;
-
 module.exports = function TrueEverfulNostrum(mod) {
-    if(mod.proxyAuthor !== 'caali' || !global.TeraProxy) {
-        mod.warn('You are trying to use True Everful Nostrum on an unsupported legacy version of tera-proxy.');
-        mod.warn('The module may not work as expected, and even if it works for now, it may break at any point in the future!');
-        mod.warn('It is highly recommended that you download the latest official version from the #proxy channel in https://discord.gg/dUNDDtw');
-    }
-
     mod.game.initialize(['me', 'contract']);
 
     // User interaction
@@ -236,26 +228,4 @@ module.exports = function TrueEverfulNostrum(mod) {
         abnormalities = {};
         start();
     });
-
-    // Settings UI
-    let ui = null;
-    if (global.TeraProxy.GUIMode) {
-        ui = new SettingsUI(mod, require('./settings_structure'), mod.settings, { height: 232 });
-        ui.on('update', settings => {
-            mod.settings = settings;
-            hookHideMessage();
-
-            if (isRunning()) {
-                stop();
-                start();
-            }
-        });
-
-        this.destructor = () => {
-            if (ui) {
-                ui.close();
-                ui = null;
-            }
-        };
-    }
 };
