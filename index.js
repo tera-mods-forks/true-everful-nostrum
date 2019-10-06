@@ -11,12 +11,8 @@ module.exports = function TrueEverfulNostrum(mod) {
 
     // User interaction
     mod.command.add('ten', () => {
-        if (ui) {
-            ui.show();
-        } else {
-            mod.settings.enabled = !mod.settings.enabled;
-            mod.command.message((mod.settings.enabled ? 'en' : 'dis') + 'abled');
-        }
+        mod.settings.enabled = !mod.settings.enabled;
+        mod.command.message((mod.settings.enabled ? 'en' : 'dis') + 'abled');
     });
 
     // Abnormality tracking
